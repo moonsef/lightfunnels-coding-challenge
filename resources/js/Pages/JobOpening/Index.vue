@@ -39,6 +39,7 @@ const { job_openings } = defineProps({
                                     Created at
                                 </th>
                                 <th class="py-3 px-6 text-center">Deadline</th>
+                                <th class="py-3 px-6 text-center">Status</th>
                                 <th class="py-3 px-6 text-center">Actions</th>
                             </tr>
                         </thead>
@@ -62,6 +63,23 @@ const { job_openings } = defineProps({
                                 </td>
                                 <td class="py-3 px-6 text-center">
                                     {{ job_opening.deadline }}
+                                </td>
+                                <td
+                                    v-if="job_opening.is_closed"
+                                    class="py-3 px-6 text-center"
+                                >
+                                    <span
+                                        class="bg-red-600 px-2 py-0.5 text-white font-semibold rounded-lg"
+                                    >
+                                        Close
+                                    </span>
+                                </td>
+                                <td v-else class="py-3 px-6 text-center">
+                                    <span
+                                        class="bg-green-600 px-2 py-0.5 text-white font-semibold rounded-lg"
+                                    >
+                                        Open
+                                    </span>
                                 </td>
                                 <td class="py-3 px-6 text-center">
                                     <div

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('location');
             $table->timestamp('deadline');
-
+            $table->boolean('is_closed')->default(false);
             $table->foreignId('createdby_id')->constrained('users');
             $table->timestamps();
         });

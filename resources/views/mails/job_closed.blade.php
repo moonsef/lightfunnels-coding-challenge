@@ -1,0 +1,1 @@
+<p>Job title <strong>{{ $title }}</strong> has been closed due to reaching the application deadline.</p>
