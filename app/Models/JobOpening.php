@@ -17,8 +17,8 @@ class JobOpening extends Model
         'deadline' => 'datetime:Y-m-d h:i'
     ];
 
-    public function createdby()
+    public function created_by()
     {
-        return $this->belongsTo(User::class, 'createdby_id');
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 }

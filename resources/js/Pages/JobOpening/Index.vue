@@ -28,7 +28,7 @@ const { job_openings } = defineProps({
                         </Link>
                     </div>
 
-                    <table class="min-w-max w-full table-auto">
+                    <table class="min-w-max w-full table-auto overflow-x-auto">
                         <thead>
                             <tr
                                 class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"

@@ -23,7 +23,7 @@ class SendJobClosedNotification
      */
     public function handle(JobOpeningClosed $event): void
     {
-        Mail::to($event->job_opening->createdby->email)
+        Mail::to($event->job_opening->created_by->email)
             ->send(new JobClosed($event->job_opening->title));
     }
 }

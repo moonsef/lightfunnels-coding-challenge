@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\UserRole;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobOpeningController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -17,15 +19,21 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return to_route('login');
-});
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        if (auth()->user()->role === UserRole::Employee) {
+            return redirect()->route('job_opening.index');
+        }
+
+        if (auth()->user()->role === UserRole::JobSeeker) {
+            return redirect()->route('job.index');
+        }
+        abort(403);
+    });
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -34,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/job-opening', [JobOpeningController::class, 'index'])->name('job_opening.index');
     Route::get('/job-opening/create', [JobOpeningController::class, 'create'])->name('job_opening.create');
     Route::post('/job-opening', [JobOpeningController::class, 'store'])->name('job_opening.store');
+
+    Route::get('/jobs', [JobApplicationController::class, 'index'])->name('job.index');
+    Route::post('/jobs', [JobApplicationController::class, 'store'])->name('job.store');
 });
+
 
 require __DIR__ . '/auth.php';

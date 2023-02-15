@@ -11,7 +11,7 @@ class JobOpeningController extends Controller
     public function index()
     {
         $job_openings = JobOpening::query()
-            ->whereBelongsTo(auth()->user(), 'createdby')
+            ->whereBelongsTo(auth()->user(), 'created_by')
             ->latest('id')
             ->get();
 
@@ -36,7 +36,7 @@ class JobOpeningController extends Controller
                 'title' => $request->title,
                 'location' => $request->location,
                 'deadline' => $request->deadline,
-                'createdby_id' => auth()->user()->id
+                'created_by_id' => auth()->user()->id
             ]);
 
         return to_route('job_opening.index');
