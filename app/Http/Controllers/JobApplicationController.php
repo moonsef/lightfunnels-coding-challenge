@@ -14,6 +14,14 @@ class JobApplicationController extends Controller
     {
         $jobs = JobOpening::query()
             ->where('is_closed', false)
+            ->whereNotIn(
+                'id',
+                fn ($query) =>
+                $query
+                    ->select('job_openings_id')
+                    ->from('job_applications')
+                    ->where('applied_by_id', auth()->user()->id)
+            )
             ->get();
 
         return Inertia::render('Job', compact('jobs'));
