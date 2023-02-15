@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 const { job_openings } = defineProps({
     job_openings: Array,
@@ -14,6 +15,19 @@ const { job_openings } = defineProps({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="flex justify-end p-5">
+                        <Link
+                            :href="route('job_opening.create')"
+                            class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
+                        >
+                            <p
+                                class="text-sm font-medium leading-none text-white"
+                            >
+                                Add Job opening
+                            </p>
+                        </Link>
+                    </div>
+
                     <table class="min-w-max w-full table-auto">
                         <thead>
                             <tr
